@@ -1,14 +1,15 @@
 import axios from "axios";
-import { useEffect } from "react";
 
-export const API = {
-  baseUrl: "https://api.themoviedb.org/3",
+export const tmdb = {
+  urlBase: "https://api.themoviedb.org/3",
   apiKey: "?api_key=4731f843be0ef719c516f748dad07f59",
   entity: {
     topRatedMovies: "/movie/top_rated",
     topRatedTv: "/tv/top_rated",
     popularMovies: "/movie/popular",
     popularTv: "/tv/popular",
+    movieById: "/movie/",
+    tvById: "/tv/",
   },
   language: {
     en: "&language=en-US",
@@ -26,62 +27,60 @@ export const API = {
   },
 };
 
-export const tryGetTopRatedMovies = async (apiKey, page) => {
-  try {
-    const response = await axios.get(
-      "https://api.themoviedb.org/3/movie/top_rated/" +
-        apiKey +
-        "&language=es-ES&page=" +
-        page
-    );
+export const apiQuality = {
+  posterSmall: "posterSmall",
+  posterMedium: "posterMedium",
+  posterLarge: "posterLarge",
+  backdropSmall: "backdropSmall",
+  backdropMedium: "backdropMedium",
+  backdropLarge: "backdropLarge",
+};
 
-    return response.data;
+export const apiEntity = {
+  topRatedMovies: "topRatedMovies",
+  topRatedTv: "topRatedTv",
+  popularMovies: "popularMovies",
+  popularTv: "popularTv",
+  movieById: "movieById",
+  tvById: "tvById",
+};
+
+export const apiLanguage = {
+  english: "en",
+  spanish: "es",
+};
+
+export const tryGetPopularMovies = async (page = 1) => {
+  try {
+    const res = await axios(
+      `https://api.themoviedb.org/3/movie/popular?api_key=4731f843be0ef719c516f748dad07f59&language=en-US&page=${page}`
+    );
+    return res.data.results;
   } catch (error) {
     return error;
   }
 };
 
-//////////////////////////////////////////////////////////////////////////
-
-export const MakeAPI = {
+export const apiBuilder = {
   tryGet: async (entity, lang = "es", page = 1) => {
-    const url = `${API.baseUrl}${API.entity[entity]}${API.apiKey}${API.language[lang]}${API.pagination}${page}`;
+    const url = `${tmdb.urlBase}${tmdb.entity[entity]}${tmdb.apiKey}${tmdb.language[lang]}${tmdb.pagination}${page}`;
     try {
-      const response = await axios.get(url);
-      return response.data;
+      const res = await axios(url);
+      return res.data.results;
     } catch (error) {
       return error;
     }
   },
   tryGetById: async (entity, id, lang = "es") => {
-    const url = `${API.baseUrl}${API.entity[entity]}/${id}${API.apiKey}${API.language[lang]}`;
+    const url = `${tmdb.urlBase}${tmdb.entity[entity]}/${id}${tmdb.apiKey}${tmdb.language[lang]}`;
     try {
-      const response = await axios.get(url);
-      return response.data;
+      const res = await axios(url);
+      return res;
     } catch (error) {
       return error;
     }
   },
-};
-
-/* 
-export const services = {
-  getTopRatedMovies: async (page) => {
-    const response = await API.tryGet('topRatedMovies', 'es', page);
-    return response;
+  tryGetPoster: (path, quality = apiQuality.posterLarge) => {
+    return `${tmdb.imageUrl}${tmdb.quality[quality]}${path}`;
   },
 };
- */
-/* 
-export const services = {
-    tryGetTopRatedMovies: async (page = 1) => {
-      const url = createUrl.api(API.entity.topRatedMovies, "es", page);
-      try {
-        const response = await axios.get(url);
-        return response.data;
-      } catch (error) {
-        return error;
-      }
-    },
-  }; 
-*/
