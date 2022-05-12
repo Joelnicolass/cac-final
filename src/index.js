@@ -4,11 +4,14 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import Banner from "./components/Banner/Banner";
+import Layout from "./components/Layout/Layout";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Banner />
+    <Layout>
+      <Banner />
+    </Layout>
   </React.StrictMode>
 );
 

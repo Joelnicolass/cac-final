@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { apiBuilder, apiLanguage, apiEntity } from "../apiConfig";
+import { apiBuilder, apiLanguage } from "../apiConfig";
 
 const useApi = (entity, lang = apiLanguage.spanish, pagination = 1) => {
   const [values, setValues] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(pagination);
 
   const getData = async () => {
-    setLoading(true);
+    setIsLoading(true);
     setError(null);
 
     const res = await apiBuilder.tryGet(entity, lang, page);
@@ -18,19 +18,19 @@ const useApi = (entity, lang = apiLanguage.spanish, pagination = 1) => {
     } else {
       setValues(res);
     }
+    setIsLoading(false);
 
-    setLoading(false);
+    return res;
   };
 
   useEffect(() => {
     getData();
   }, [page]);
 
-  const handleNext = () => {
-    setPage(page + 1);
-  };
+  const nextPage = () => {};
+  const previusPage = () => {};
 
-  return [values, loading, error, handleNext];
+  return [values, isLoading, error];
 };
 
 export default useApi;
