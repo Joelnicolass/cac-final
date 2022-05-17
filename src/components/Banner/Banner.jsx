@@ -1,61 +1,49 @@
-import React, { useEffect, useState } from "react";
-import { apiEntity, apiBuilder } from "../../apiConfig";
+import React, { useEffect } from "react";
+import { apiEntity } from "../../apiConfig";
 import useApi from "../../hooks/useApi";
+import Separator from "../Separator/Separator";
 import styles from "./Banner.module.css";
 
 const Banner = () => {
-  const [movie, loading, error] = useApi(apiEntity.popularMovies);
-
-  const [backImg, setBackImg] = useState(null);
-
-  const randomIndex = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
-
-  useEffect(() => {
-    if (movie) {
-      const url = apiBuilder.tryGetPoster(
-        movie[randomIndex(0, 5)]?.poster_path
-      );
-      setBackImg(url);
-    }
-  }, [movie]);
+  const [movie, loading, error, randomMovie, backImg] = useApi(
+    apiEntity.popularMovies
+  );
 
   return (
-    <>
-      <div
-        className={styles["banner-container"]}
-        style={
-          loading
-            ? { backgroundImage: "none" }
-            : {
-                backgroundImage: `url(${backImg})`,
-              }
-        }
-      >
-        <div>
-          <h1>PELICULA</h1>
+    <div
+      className={`${styles.banner_container}`}
+      style={
+        loading
+          ? { backgroundImage: "none" }
+          : {
+              backgroundImage: `url(${backImg})`,
+            }
+      }
+    >
+      <div className={styles.banner_gradient}>
+        <Separator height={"250px"} />
+
+        <div className={styles.banner_title}>
+          <h1>{loading ? "Loading..." : randomMovie?.title}</h1>
         </div>
+        <Separator height={"40px"} />
+
         <div>
-          <h2>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur
-            dolore consequuntur placeat aperiam quisquam rerum quo? Hic ea
-            exercitationem laudantium ducimus consequatur soluta sequi, quisquam
-            dicta et, dolore nesciunt rem.
-          </h2>
+          <h2>{loading ? "Loading..." : randomMovie?.overview}</h2>
         </div>
-        <div>
-          <h2>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem
-            ipsum aliquid voluptas labore sed ipsa blanditiis debitis facilis
-            ducimus, asperiores praesentium, culpa facere rem iure voluptatibus
-            ex aut porro nisi?
-          </h2>
+        <div className={styles.banner_buttons}>
+          <button
+            className={styles.banner_button}
+            onClick={() => {
+              console.log(movie);
+            }}
+          >
+            MAS INFORMACION
+          </button>
+          <button className={styles.banner_button}>REPRODUCIR</button>
         </div>
-        <button>MAS INFORMACION</button>
-        <button>REPRODUCIR</button>
       </div>
-    </>
+    </div>
   );
 };
 

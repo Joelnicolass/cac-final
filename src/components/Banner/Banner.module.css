@@ -1,7 +1,110 @@
-.banner-container {
+.banner_container {
   width: 100vw;
   height: 80vh;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  font-weight: bold;
+  color: #fff;
+}
+
+.banner_header {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.banner_title {
+  transition: 0.3s;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.banner_header h1 {
+  transition: 0.3s;
+  color: rgb(255, 0, 0);
+  font-size: 4rem;
+  margin-right: 0.5em;
+}
+
+.banner_header p {
+  transition: 0.3s;
+  color: rgb(255, 255, 255);
+  font-size: 1.5rem;
+}
+
+.banner_sub {
+  transition: 0.3s;
+  font-size: 1.8rem;
+  color: #fff;
+  font-weight: lighter;
+}
+
+.banner_description {
+  transition: 0.3s;
+  font-size: 1.2rem;
+  color: #fff;
+  font-weight: lighter;
+}
+
+.banner_buttons {
+  transition: 0.3s;
+  margin-top: 2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.banner_buttons button:nth-child(2) {
+  margin-left: 2em;
+}
+
+.banner_button {
+  width: 220px;
+  height: 55px;
+  background-color: rgba(224, 224, 224, 1);
+  color: rgb(0, 0, 0);
+  font-size: 1.2rem;
+  font-weight: lighter;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.banner_button:hover {
+  background-color: rgba(224, 224, 224, 0.2);
+  color: rgb(255, 255, 255);
+}
+
+.banner_header_content {
+  transition: 0.3s;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.banner_hide {
+  transition: 0.3s;
+  opacity: 0;
+}
+
+.banner_gradient {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0) 90%,
+    rgb(27, 27, 27) 100%
+  );
+}
+
+.banner_position {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10em;
 }
