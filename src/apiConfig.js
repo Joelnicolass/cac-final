@@ -57,7 +57,7 @@ export const tryGetPopularMovies = async (page = 1) => {
     );
     return res.data.results;
   } catch (error) {
-    return error;
+    return [];
   }
 };
 
@@ -68,7 +68,7 @@ export const apiBuilder = {
       const res = await axios(url);
       return res.data.results;
     } catch (error) {
-      return error;
+      return [];
     }
   },
   tryGetById: async (entity, id, lang = "es") => {
@@ -77,10 +77,10 @@ export const apiBuilder = {
       const res = await axios(url);
       return res;
     } catch (error) {
-      return error;
+      return [];
     }
   },
-  tryGetPoster: (path, quality = apiQuality.posterLarge) => {
+  tryGetImg: (path, quality = apiQuality.posterLarge) => {
     return `${tmdb.imageUrl}${tmdb.quality[quality]}${path}`;
   },
 };

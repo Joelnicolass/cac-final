@@ -5,13 +5,14 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import Banner from "./components/Banner/Banner";
 import Layout from "./components/Layout/Layout";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Homepage from "./pages/Homepage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Layout>
-      <Banner />
-    </Layout>
+    <App />
   </React.StrictMode>
 );
 
